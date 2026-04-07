@@ -1,5 +1,5 @@
 ---
-name: url-to-translation-markdown
+name: translation-to-markdown
 description: 根据原文 URL 生成适合 Astro 博客的中文译文 Markdown：含 YAML frontmatter、开篇版权说明引用块、译文正文、译者总结与正文配图规则。在用户给出文章链接并希望产出完整译稿时使用。
 ---
 
