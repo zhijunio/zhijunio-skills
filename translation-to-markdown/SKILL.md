@@ -57,6 +57,7 @@ canonicalURL: "https://original-url"
 字段说明：
 
 - `title`
+  - 使用双引号
   - 以 `【译】` 开头
   - 使用自然中文
   - 贴近原文语气
@@ -72,10 +73,9 @@ canonicalURL: "https://original-url"
   - 默认一律为 `true`，除非用户明确要求否则
 
 - `slug`
-  - 优先取 URL 路径里最后一段有意义的片段
-  - 去掉 `.html`、`.htm`、`index`、日期前缀等噪音或无意义后缀
-  - 必要时可从标题推导 kebab-case
-  - 必须为小写 ASCII，单词间用连字符
+  - 必须取 URL 路径里最后一段有意义的片段
+  - 不能自行推导
+  - 去掉 `.html`、`.htm` 等无意义后缀
 
 - `categories`
   - 固定为 `[ "translation" ]`
