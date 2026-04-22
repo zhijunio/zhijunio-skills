@@ -158,14 +158,15 @@ Show the saved entry to user for confirmation.
 ## Available Tools for Metadata
 
 Use any available tool to fetch page metadata:
-- `read` skill - for reading web pages and PDFs
-- `xcrawl-scrape` - for scraping page content
-- `WebFetch` - for fetching web content  
-- `gstack` - for browser-based testing and screenshots
-- `curl` + parsing - as fallback
+
+- **[Defuddle](https://defuddle.md/)** — primary option when available: extracts clean, reader-style content from URLs (good for title, description, and tag generation from article pages)
+- `xcrawl-scrape` — for scraping page content
+- `WebFetch` — for fetching web content
+- `curl` + parsing — as fallback
 - Any other web fetching tools available in the environment
 
 **Tool selection priority:**
-1. Use the tool that is most reliable in your environment
-2. Prefer tools that return clean text content
-3. Have fallback options if primary tool fails
+1. Prefer [Defuddle](https://defuddle.md/) when the environment can call it (clean extraction improves metadata and tags)
+2. Otherwise use the tool that is most reliable in your environment
+3. Prefer tools that return clean text content
+4. Have fallback options if primary tool fails
