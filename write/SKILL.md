@@ -5,7 +5,7 @@ description: 去 AI 味、就地润色中英文正文；改稿、审稿、双语
 
 # Write：去 AI 味，改得像人写的
 
-> 思路借鉴 [tw93/Waza `skills/write`](https://github.com/tw93/Waza/tree/main/skills/write)（MIT）；**词表与分模式清单** 在 `write/references/`，本页只保留边界与硬规则。
+**词表与分模式清单** 在 `write/references/`，本页只保留边界与硬规则。
 
 首条回复可在句首内联加 `🥷`（不要单独成段）。
 

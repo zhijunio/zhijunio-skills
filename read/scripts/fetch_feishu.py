@@ -10,7 +10,7 @@ Usage:
   python3 fetch_feishu.py "https://xxx.feishu.cn/docx/TOKEN"
   python3 fetch_feishu.py "https://xxx.feishu.cn/wiki/WIKI_TOKEN"
 
-Inspired by patterns in tw93/Waza (MIT) and Feishu docx block model.
+Implements Feishu Open API docx block traversal for Markdown export.
 """
 from __future__ import annotations
 

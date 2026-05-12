@@ -24,7 +24,3 @@
 ## 3. 外部链接（不随仓库同步正文）
 
 - 中文排版：[中文文案排版指北](https://github.com/mzlogin/chinese-copywriting-guidelines)
-
-## 4. 思路来源
-
-部分结构曾对照 [tw93/Waza — skills/write](https://github.com/tw93/Waza/tree/main/skills/write)（MIT）；本目录为 **自包含改写**，不依赖 Waza 仓库路径。

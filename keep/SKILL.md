@@ -13,26 +13,24 @@ description: 通过 Keep Open API 登录并拉取跑步记录，生成与 Garmin
 - 用户提到 **`fetch_keep_run.py`**、**`running.json`**、**Keep API**、**VDOT** / **训练负荷**。
 - 需要说明脚本依赖、环境变量、输出路径或调试方式。
 
-脚本已置于本技能目录 **`keep/scripts/fetch_keep_run.py`**；若上游有破坏性更新，可对照 GitHub 同步替换该文件。
+脚本已置于本技能目录 **`keep/scripts/fetch_keep_run.py`**，与上游 **[zhijunio.github.io/scripts/fetch-keep-run.py](https://github.com/zhijunio/zhijunio.github.io/blob/main/scripts/fetch-keep-run.py)** 对齐；后续以该文件为准同步。
 
 ## 脚本职责（摘要）
 
-1. 使用手机号 + 密码调用 Keep 登录接口，取得 token。
-2. 分页拉取跑步 ID 列表，再逐条请求单条跑步详情。
-3. 将 API 数据映射为行结构，再经 `format_running_data` 汇总为 `stats` + `runs`。
-4. **所有写入 `running.json` 的展示时间统一为上海时区**（`Asia/Shanghai`，UTC+8）；周期统计（昨日/本周/本月/年）也按上海本地日期计算。
+1. 使用手机号 + 密码调用 Keep 登录接口，取得 session。
+2. 分页拉取跑步记录，支持**增量**（遇已有 `startTime` 停止）与 **`--full` 全量**。
+3. 若输出文件已存在则**合并**已有 `runs`（按 `startTime` 去重，新数据优先），并重算 `stats`。
+4. **展示时间与周期统计按上海时区**（`UTC+8`）写入。
 
 ## 依赖
 
 - **Python 3**
 - **`requests`**
-- **`pycryptodome`**（`Crypto.Cipher.AES`）：解码加密的 `geoPoints` / 心率 runmap 数据。
-- **`haversine`**（可选）：当没有 `crossKmPoints` 而需从 `geoPoints` 推算每公里分段时使用；缺省则分段可能为空。
 
 安装示例：
 
 ```bash
-pip install requests pycryptodome haversine
+pip install requests
 # 或：pip install -r keep/scripts/requirements.txt
 ```
 
@@ -50,28 +48,32 @@ pip install requests pycryptodome haversine
 
 ## 命令行
 
-在仓库根目录执行时，`--output` 的默认值相对于**脚本所在目录**解析（默认写入 `keep/scripts/data/running.json`）：
+`--output` 为**相对脚本所在目录**的路径。上游默认 **`../public/data/running.json`**（适配个人站 Jekyll 布局）；在本 skills 仓库中请**显式指定**输出路径，例如：
 
 ```bash
-python keep/scripts/fetch_keep_run.py --mobile "$KEEP_MOBILE" --password "$KEEP_PASSWORD"
+python keep/scripts/fetch_keep_run.py \
+  --mobile "$KEEP_MOBILE" \
+  --password "$KEEP_PASSWORD" \
+  --output data/running.json
 ```
 
-若在 `keep/scripts/` 下执行，则等价于 `python fetch_keep_run.py ...`，默认输出为当前目录下的 `data/running.json`。
+若在 `keep/scripts/` 下执行：`python fetch_keep_run.py ... --output data/running.json`。
 
 常用参数：
 
 | 参数 | 说明 |
 |------|------|
-| `--output` | 输出文件，默认 `data/running.json` |
-| `--limit N` | 只拉前 N 条（调试） |
-| `--debug` | 打印每条请求的原始 `data` 与转换后的 row |
+| `--output` | 输出文件（相对脚本目录）；默认 `../public/data/running.json` |
+| `--full` | 全量拉取并合并，忽略增量早停 |
+| `--limit N` | 最多获取 N 条（调试用安全上限） |
+| `--debug` | 打印请求与转换细节 |
 
 ## 输出结构要点
 
-- **`stats`**：`total_runs`、`total_distance`、`total_duration`、`avg_pace`、`longest_run`、`avg_vdot`、`total_training_load`、`period_stats`（`yesterday` / `week` / `month` / `year` / `total`）、`statistics_time`（上海时间）。
-- **`runs`**：每条含 `date`（上海本地时间字符串）、`distance`（km）、`duration`、`pace`、`heart_rate`、`vdot`、`training_load`、`hr_zone`、`segments`（若有数据源）等。
+- **`stats`**：总距离/时长/配速、VDOT、训练负荷、`period_stats`（昨日/周/月/年/累计）、`statistics_time`（上海时间）等，以脚本内 `_calculate_stats` 为准。
+- **`runs`**：每条含 **`startTime` / `endTime`**（上海本地时间字符串）、`distance`（km）、`duration`、`averagePace`、`averageHeartRate`、**`vDOT`**、**`trainingLoadScore`**、**`heartRateZone`**、**`segments`** 等；字段名与上游 `running.json` 消费端保持一致。
 
-若代码中有 `save_running_json(..., merge=True)` 的调用场景：**按 `date` 键合并**已有文件并重算统计；默认 CLI `main()` 一般为覆盖写入（以仓库内脚本为准）。
+若目标 `running.json` 已存在：脚本会读入其中 **`runs`**，与本次拉取按 **`startTime`** 合并去重后写回并重算 **`stats`**；`--full` 时走全量拉取逻辑（见脚本内注释）。
 
 ## Agent 操作建议
 

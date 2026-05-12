@@ -91,7 +91,7 @@ test -d "$ROOT/.github/workflows" && echo has_ci=yes || echo has_ci=no
 |--------|------|
 | 规则 | `.claude/rules/` vs `CLAUDE.md` |
 | 本地覆盖 | `.claude/settings.local.json` 是否误提交 |
-| 深检 | 可选 [Waza collect-data.sh](https://github.com/tw93/Waza/tree/main/skills/health) |
+| 深检 | 若团队有自建「健康度收集」脚本（如 Claude Code 常用的 `collect-data.sh`），可与本 skill 摘要对照；以本仓库 `collect-context.sh` 为事实基线 |
 
 ## 7. Codex CLI
 
@@ -142,6 +142,6 @@ test -d "$ROOT/.github/workflows" && echo has_ci=yes || echo has_ci=no
 
 不审业务逻辑；不自动改文件。
 
-## 19. 思路来源
+## 19. 维护说明
 
-曾对照 [Waza health](https://github.com/tw93/Waza/tree/main/skills/health)（MIT）；多平台表为自维护，**以各产品最新文档为准**。
+多平台路径表由本仓库自维护；各产品配置与 CLI 以**官方当前文档**为准。

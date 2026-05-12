@@ -105,6 +105,6 @@ Content
 | PDF 报缺依赖 | 安装 poppler 或 `pip install -r scripts/requirements-read.txt` |
 | URL 含 `&` | 调用脚本时 **务必给 URL 加引号** |
 
-## 9. 与 Waza 的关系
+## 9. 自包含说明
 
-本目录与脚本为 **本仓库自包含实现**；思路曾对照 [Waza read](https://github.com/tw93/Waza/tree/main/skills/read)（MIT），**不依赖** Waza 仓库路径或 `CLAUDE_SKILL_DIR`。
+本目录与 `read/scripts/` 均以本仓库为准维护；与宿主内其它抓取/技能路径无绑定关系。

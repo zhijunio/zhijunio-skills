@@ -5,7 +5,7 @@ description: 将 URL 或 PDF 转为干净 Markdown，便于引用、存档或下
 
 # Read：URL / PDF → Markdown
 
-本技能 **`read/scripts/` + `read/references/read-methods.md` 自包含**，不依赖外部 Waza 安装路径。
+本技能 **`read/scripts/` + `read/references/read-methods.md` 自包含**，路径与命令均以本仓库为准。
 
 首条回复可在句首内联加 `🥷`。
 
