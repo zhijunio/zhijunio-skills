@@ -1,82 +1,82 @@
 ---
 name: learn
-description: 多源材料 → 结构化长文或一站式参考：收集、消化、大纲、写作、去味、发布前自检。用于深入学习、调研报告、Canonical 长文；不用于单次随手搜或仅读单链接（用 read）。
+description: Multi-source materials to structured long-form or canonical reference — collect, digest, outline, write, de-AI, pre-publish checks. For deep study, research reports, canonical articles; not for one-off search or a single link (use read).
 ---
 
-# Learn：从材料到可发表结构
+# Learn — from sources to publishable structure
 
-与 **`read`**（抓取）、**`humanize`**（去 AI 味）、**`edit-article`**（长文重排）**链式使用**效果最佳。
+Works best chained with **`read`** (fetch), **`humanize`** (de-AI), and **`edit-article`** (long-form reorder).
 
-首条回复可在句首内联加 `🥷`。
+You may inline `🥷` at the start of the first reply.
 
-## 边界
+## Boundaries
 
-- **单链接只抓取** → 用 **`read`**。
-- **单链接 + 要摘要/观点** → 可先 `read` 再答；不必强行走全流程。
-- **`learn`** = **多源** + **产出新结构**（文章 / 参考笔记 / Canonical 一篇通）。
+- **Single link, fetch only** → use **`read`**.
+- **Single link + summary/opinion** → `read` then answer; full pipeline optional.
+- **`learn`** = **multiple sources** + **new structure** (article / reference note / one canonical piece).
 
-## 前置（不阻断）
+## Prerequisites (non-blocking)
 
-若本仓库同时有 **`read` / `humanize`** skill：Phase 1 抓取应用 `read`；Phase 5 润色与去味可交给 `humanize`；章节结构需重排时先 `edit-article`。缺失时：抓取用环境自带 fetch；去味按 `humanize` skill 中的自检表手工过一遍。
+If this repo also has **`read` / `humanize`**: Phase 1 fetch via `read`; Phase 5 polish/de-AI via `humanize`; reorder sections with `edit-article` first when needed. If missing: use the host’s fetch; de-AI manually against `humanize` checklists.
 
-## 选模式（先让用户确认；不确定则推荐 Quick Reference）
+## Choose a mode (confirm with user; default Quick Reference if unsure)
 
-| 模式 | 目标 | 入口 | 结束于 |
-|------|------|------|--------|
-| **Deep Research** | 理解到能写透 | Phase 1 | Phase 6 可发表稿 |
-| **Quick Reference** | 快速建立心智模型 | Phase 2 | Phase 2 笔记即可 |
-| **Write to Learn** | 已有材料，靠写倒逼理解 | Phase 3 | Phase 6 可发表稿 |
-| **Canonical Article** | 一篇读完少再搜 | Phase 1 | Phase 6 单篇权威稿 |
+| Mode | Goal | Entry | Ends at |
+|------|------|-------|---------|
+| **Deep Research** | Understand deeply enough to write | Phase 1 | Phase 6 publishable draft |
+| **Quick Reference** | Fast mental model | Phase 2 | Phase 2 notes enough |
+| **Write to Learn** | Existing notes; write to learn | Phase 3 | Phase 6 publishable draft |
+| **Canonical Article** | One piece replaces further searching | Phase 1 | Phase 6 single authoritative article |
 
-### Canonical 附加条件
+### Canonical extras
 
-- 大子题独立成节，关键内容不进「脚注式一句带过」。
-- **示例**：原则 + 可操作例子。
-- **常见坑**与避免方式。
-- **Further reading** 3–5 条，标明 **最适合入门** 的 1–2 条。
-- Phase 6 自问：**只读本文能否理解或动手？**
+- Major subtopics get their own sections; no critical content buried in a one-line aside.
+- **Examples**: principle + actionable example.
+- **Common pitfalls** and how to avoid them.
+- **Further reading** 3–5 items; mark **best for beginners** (1–2).
+- Phase 6 ask: **Can someone understand or act from this article alone?**
 
-## Phase 1：Collect
+## Phase 1: Collect
 
-- 优先 **一手源**：论文、官方文档与博客、维护者写的 design note、权威实现仓库。**少拿二手科普当唯一依据**。
-- 每条源建议三步：**Discover**（搜 URL 列表，此步不全文抓取）→ **Fetch**（每个 URL 走 **`read`**）→ **File**（保存到研究目录子文件夹，**移动**已下载文件，避免重复抓取）。
-- 量级参考：博文级 **5–10** 源；深度综述 **15–20** 源（可按主题删减）。
+- Prefer **primary sources**: papers, official docs/blogs, maintainer design notes, authoritative repos. **Avoid second-hand explainers as the only basis**.
+- Per source: **Discover** (URL list, no full fetch yet) → **Fetch** (each URL via **`read`**) → **File** (save under a research subfolder; **move** downloads to avoid re-fetch).
+- Scale: blog-level **5–10** sources; deep survey **15–20** (trim by topic).
 
-## Phase 2：Digest
+## Phase 2: Digest
 
-- 通读，**大约砍掉一半**弱相关或重复内容。
-- 对要进大纲的论断：是否跨段落重复出现、是否可迁移到新问题、是否为领域共识？**过窄的「金句」**不硬 distill。
-- **事实冲突**：两源不一致时 **并列写出** 与各自依据，不默认选边。
+- Read through; **cut roughly half** weak or duplicate material.
+- For outline claims: repeated across sections? transferable? field consensus? **Do not force narrow “golden quotes.”**
+- **Factual conflict**: present both sides with sources; do not pick a winner by default.
 
-## Phase 3：Outline
+## Phase 3: Outline
 
-- 每节标注 **主要来源**；无来源的节 → 删或回到 Phase 1 补源。
-- 大纲不稳 **不进 Phase 4**。
+- Each section tags **primary sources**; unsourced sections → delete or return to Phase 1.
+- Unstable outline → **do not enter Phase 4**.
 
-## Phase 4：Fill In
+## Phase 4: Fill In
 
-- 按节写作；某一节写不动 → **该节**回 Phase 2 补理解，不必全盘推翻。
-- **卡住信号**（任一）：开头改三遍仍不满意；整节只靠单一来源且无法交叉验证；需要 Phase 1 未收集的新源才能落笔；无法向他人口头解释该段主张。
+- Write section by section; stuck on one section → that section back to Phase 2, not a full restart.
+- **Stuck signals** (any): opening rewritten 3+ times; section rests on one uncross-checkable source; needs sources not collected in Phase 1; cannot explain the claim aloud.
 
-## Phase 5：Refine
+## Phase 5: Refine
 
--  brief：**删冗、标论证断裂、标「未解释就使用」的概念、标缺 citation 的断言**；**不替用户写全新章节**。
-- 去 AI 味：有 **`humanize`** 则按其执行；否则对照 `humanize` skill 的快速自检表。
+- Brief pass: **cut fluff, flag broken argument flow, undefined terms, missing citations**; **do not write wholly new sections for the user**.
+- De-AI: run **`humanize`** if available; else manual check against `humanize` quick lists.
 
-## Phase 6：Self-review & 发布边界
+## Phase 6: Self-review and publish boundary
 
-- **真人**线性通读至少两轮（用户本人，不是模型代读）。
-- 用户确认「可以发」后 **停止**：**不**擅自上传博客、社媒或代发 PR，除非用户 **明确**要求执行发布动作。
+- **Human** linear read at least two passes (the user, not the model as substitute).
+- After the user says publishable → **stop**: **do not** post to blog, social, or open PR unless the user **explicitly** asks.
 
 ## Gotchas
 
-| 情况 | 处理 |
-|------|------|
-| 堆几十篇二手文章当「调研」 | 回到 Phase 1 标准，补一手源 |
-| 已能用 `read` 却全程 curl 糊弄 | 丢失付费墙/国内平台/重 JS 页的可用性 |
-| Phase 2 只做摘要不做模型 | Digest 是 **建模**，不是缩写 |
-| 用户说可以发了还主动要代发 | 禁止；发布是用户动作 |
+| Situation | Handling |
+|-----------|----------|
+| Dozens of second-hand articles as “research” | Return to Phase 1; add primary sources |
+| `read` available but raw `curl` everywhere | Loses paywalls, CN platforms, heavy JS pages |
+| Phase 2 summary only, no model | Digest is **modeling**, not abbreviation |
+| User said OK to publish but agent offers to post | Forbidden; publishing is a user action |
 
-## 与本仓库 read 的配合
+## Pairing with `read` in this repo
 
-Phase 1 每条 URL 的抓取请用 **`read/scripts/read-url.sh`**（及 `read/references/read-methods.md`），必要时再叠加 **MCP（如 Firecrawl）**；勿用裸 `curl` 替代整条抓取链以免丢付费墙与平台路由。
+Phase 1: each URL via **`read/scripts/read-url.sh`** and **`read/references/read-methods.md`**; add **MCP (e.g. Firecrawl)** when needed. Do not replace the full fetch chain with bare `curl`.

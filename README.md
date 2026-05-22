@@ -1,68 +1,68 @@
 # zhijunio-skills
 
-面向 **Cursor** 等 AI 编程助手的 **Agent Skills** 合集：每个技能一个目录，核心说明在 **`SKILL.md`**（YAML 的 `name` / `description` 供宿主发现与触发）。部分技能附带 **`references/`** 操作细则与 **`scripts/`** 可执行脚本，便于复现与离线流水线。
+**Agent Skills** for **Cursor** and similar AI coding assistants: one directory per skill, with **`SKILL.md`** as the entry (`name` / `description` in YAML for discovery). Some skills add **`references/`** playbooks and **`scripts/`** for reproducible runs.
 
-## 技能一览
+## Skills
 
-| 目录 | 作用摘要 |
-|------|-----------|
-| [**bookmark**](bookmark/SKILL.md) | 将链接保存为本地 Markdown 书签（标题、标签、去重）。 |
-| [**diary**](diary/SKILL.md) | 日记落盘：路径、时间戳、图片、`DIARY_VAULT_ROOT` 与 Git 流程。 |
-| [**health**](health/SKILL.md) | 多 Agent 平台下的协作栈体检（规则、MCP、hooks、密钥卫生）；含 `scripts/collect-context.sh` 与 `references/health-methods.md`。 |
-| [**jinrishici**](jinrishici/SKILL.md) | 调用今日诗词接口，按固定中文格式展示诗句与作者、篇名。 |
-| [**keep**](keep/SKILL.md) | Keep 跑步数据同步为 Garmin 风格 `running.json`（脚本在 `keep/scripts/`）。 |
-| [**learn**](learn/SKILL.md) | 多源材料 → 结构化长文 / Canonical 参考；与 **read**、**humanize** 链式配合。 |
-| [**read**](read/SKILL.md) | URL / PDF → Markdown；`read-url.sh`、飞书 Open API、微信/代理链等见 `read/references/`。 |
-| [**humanize**](humanize/SKILL.md) | 去 AI 味、中英润色、双语/发版/社媒/审稿；词表在 `humanize/references/`（原 `write`）。 |
-| [**edit-article**](edit-article/SKILL.md) | 长文按标题分节、DAG 重排、逐节改写（结构优先；去味用 **humanize**）。 |
-| [**grill-me**](grill-me/SKILL.md) | 对计划/设计一次一问拷问，带推荐答案，直到决策树收敛。 |
-| [**handoff**](handoff/SKILL.md) | 压缩当前会话为交接文档（临时文件 + 路径引用），供新 Agent 续作。 |
+| Directory | Summary |
+|-----------|---------|
+| [**bookmark**](bookmark/SKILL.md) | Save links as local Markdown bookmarks (title, tags, dedup). |
+| [**diary**](diary/SKILL.md) | Diary files: paths, timestamps, images, `DIARY_VAULT_ROOT`, Git flow. |
+| [**health**](health/SKILL.md) | Audit the AI collaboration stack (rules, MCP, hooks, secrets); `scripts/collect-context.sh`, `references/health-methods.md`. |
+| [**jinrishici**](jinrishici/SKILL.md) | Today’s poem API; fixed Chinese display format. |
+| [**keep**](keep/SKILL.md) | Sync Keep runs to Garmin-style `running.json` (`keep/scripts/`). |
+| [**learn**](learn/SKILL.md) | Multi-source → structured long-form / canonical reference; chains with **read**, **humanize**. |
+| [**read**](read/SKILL.md) | URL / PDF → Markdown; see `read/references/` for Feishu, WeChat, proxies, MCP. |
+| [**humanize**](humanize/SKILL.md) | De-AI polish, bilingual/release/social/review modes; word lists in `humanize/references/` (formerly `write`). |
+| [**edit-article**](edit-article/SKILL.md) | Split by headings, DAG reorder, section rewrite; use **humanize** for de-AI after structure. |
+| [**grill-me**](grill-me/SKILL.md) | One question at a time on a plan/design, with recommended answers, until the decision tree aligns. |
+| [**handoff**](handoff/SKILL.md) | Compress the session to a handoff doc (temp file + path refs) for the next agent. |
 
-## 技能之间的关系（可选链式）
+## Optional chains
 
 ```text
-read（抓取） → learn（研究写作六阶段） → humanize（去味定稿）
+read (fetch) → learn (research pipeline) → humanize (de-AI)
                     ↘                      ↗
-                 edit-article（重排章节）──┘
+                 edit-article (reorder) ──┘
                     ↘
-                 health（配置与仓库卫生审计）
+                 health (stack / repo hygiene audit)
 
-grill-me（压测方案） ──→ learn / sdd-plan（落盘时由用户切换）
-handoff（换会话续作） ──→ 指向 read / learn / humanize / edit-article 等
+grill-me (stress-test plan) ──→ learn / sdd-plan (user switches to persist)
+handoff (new session) ──→ points at read / learn / humanize / edit-article, etc.
 ```
 
-- **learn** 的 Phase 1 抓取建议走 **read** 的脚本与 `read-methods.md`。  
-- **learn** 的润色阶段可交给 **humanize**；章节逻辑乱时先 **edit-article** 再 **humanize**。  
-- **health** 独立使用，用于审计当前项目或本仓库自身的规则/MCP/敏感文件路径。
-- **grill-me** / **handoff** 与 SDD 增量契约无关；业务仓写 plan 用各自安装的 `sdd-plan` 等。
+- **learn** Phase 1: **read** scripts and `read-methods.md`.
+- **learn** Phase 5: **humanize**; messy structure → **edit-article** then **humanize**.
+- **health** stands alone for rules/MCP/secret hygiene.
+- **grill-me** / **handoff** are outside SDD increment contracts; app repos use installed `sdd-plan`, etc.
 
-## 如何使用
+## Usage
 
-1. 在 Cursor（或支持你所用 **Skills 机制** 的宿主）中，将本仓库路径加入 **Skills / 技能** 配置，使各 `SKILL.md` 被索引。  
-2. 依赖对话触发：宿主通常根据 **`description`** 与当前用户请求匹配技能；也可在提示里显式指明技能名或目录。  
-3. 带脚本的技能（如 **read**、**health**、**keep**）在 `SKILL.md` 内写有 **推荐命令**；请在目标机器上自行安装脚本依赖（如 `bash`、`python3`、`requests` 等）。
+1. Add this repo to your host’s **Skills** config so each `SKILL.md` is indexed.
+2. Skills usually trigger from **`description`** match; you can also name a skill in the prompt.
+3. Scripted skills (**read**, **health**, **keep**) document commands in `SKILL.md`; install deps (`bash`, `python3`, `requests`, …) on the machine.
 
-## 目录约定
+## Layout
 
 ```text
 <skill>/
-  SKILL.md           # 入口：name、description、边界与硬规则
-  references/        # 可选：分场景说明、检查清单
-  scripts/           # 可选：shell / Python 等
+  SKILL.md           # entry: name, description, boundaries
+  references/        # optional playbooks
+  scripts/           # optional shell / Python
 ```
 
-## 维护与依赖
+## Maintenance
 
-- 根目录 **`renovate.json`** 用于依赖与配置的自动更新提案（若已接入 Renovate）。
+- Root **`renovate.json`** for dependency update proposals when Renovate is enabled.
 
-## 鸣谢
+## Acknowledgements
 
-早期部分技能（如 read / humanize / learn / health 的分层与流程）在设计上曾参考开源项目 **[Waza](https://github.com/tw93/Waza)**（MIT）：感谢 [tw93](https://github.com/tw93) 与社区把工程习惯整理成可复用的 skill 形态。**handoff**、**grill-me**、**edit-article** 流程参考 [mattpocock/skills](https://github.com/mattpocock/skills)（MIT）。本仓库各 `SKILL.md`、`references/` 与 `scripts/` 均为独立维护与改写，**鸣谢不代表与上游行为或路径一一对应**；若你希望并列使用上游安装包，请直接参阅各上游仓库说明。
+Early **read / humanize / learn / health** layering drew on **[Waza](https://github.com/tw93/Waza)** (MIT). **handoff**, **grill-me**, and **edit-article** flows reference **[mattpocock/skills](https://github.com/mattpocock/skills)** (MIT). This repo’s `SKILL.md`, `references/`, and `scripts/` are maintained independently; **credits do not imply 1:1 parity** with upstream installs.
 
-## 许可证
+## License
 
-本仓库整体以 **[MIT License](LICENSE)** 发布。若某技能正文或脚本中另行标注第三方许可（如上游 MIT 片段），以该文件说明为准。
+**[MIT License](LICENSE)** for the repo. Per-file third-party notices in skill bodies or scripts apply where stated.
 
 ---
 
-若你希望补充 **安装截图** 或 **CI 校验 SKILL frontmatter**，可在 Issue 中说明需求边界。
+Open an Issue if you want install screenshots or CI checks for SKILL frontmatter.

@@ -1,65 +1,65 @@
 ---
 name: handoff
-description: 把当前对话压缩成交接文档，供新 Agent 续作；含建议技能、路径引用、脱敏。用户说 handoff、交接、换会话续写，或长任务结束要交接时使用。不写 plan、不替代 docs/sdd 增量契约。
-argument-hint: "下一程主要做什么？"
+description: Compress the current conversation into a handoff document for the next agent; includes suggested skills, path references, and redaction. Use when the user says handoff, session handover, continue in a new chat, or a long task needs a clean transfer. Does not write plans or replace docs/sdd increment contracts.
+argument-hint: "What should the next session focus on?"
 ---
 
-# Handoff — 会话交接
+# Handoff — session transfer
 
-为**下一个 Agent / 新会话**写一份交接文档，便于续作。灵感来自 [mattpocock/skills `handoff`](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff)（MIT），本仓增加落盘路径与中文约定。
+Write a handoff document for the **next agent / new session** so work can continue. Inspired by [mattpocock/skills `handoff`](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff) (MIT), with temp-file output in this repo.
 
-## 边界
+## Boundaries
 
-- **不是** `sdd-plan` / 业务仓 `docs/sdd/plans/` 增量契约。
-- **不重复** 已有制品全文 —— PRD、plan、ADR、issue、commit、diff 等 **用路径或 URL 引用**。
-- **脱敏**：API key、密码、token、PII 等一律打码或概括。
+- **Not** `sdd-plan` or app-repo `docs/sdd/plans/` increment contracts.
+- **Do not duplicate** full text of existing artifacts — reference PRDs, plans, ADRs, issues, commits, diffs by **path or URL**.
+- **Redact** API keys, passwords, tokens, PII (mask or summarize).
 
-## 落盘
+## Write to disk
 
-1. 用 `mktemp -t handoff-XXXXXX.md` 生成路径（先读命令输出路径）。
-2. 将交接文档写入该文件。
-3. 在对话里告知用户**绝对路径**，便于粘贴到新会话。
+1. Run `mktemp -t handoff-XXXXXX.md` and read the returned path.
+2. Write the handoff document to that file.
+3. Tell the user the **absolute path** so they can paste it into a new session.
 
-## 文档结构（建议）
+## Suggested document shape
 
 ```markdown
-# Handoff — <主题>
+# Handoff — <topic>
 
-## 下一程目标
-<用户 argument-hint 或对话约定>
+## Next-session goal
+<argument-hint or agreed focus>
 
-## 当前状态
-- 已完成：…
-- 进行中：…
-- 阻塞：…
+## Current state
+- Done: …
+- In progress: …
+- Blocked: …
 
-## 关键路径与引用
-- 仓库 / 分支 / PR：…
-- 计划或设计稿：…
-- 相关提交：…
+## Key paths and references
+- Repo / branch / PR: …
+- Plans or design docs: …
+- Relevant commits: …
 
-## 决策与约定
-- 已拍板：…
-- 待决：…
+## Decisions and conventions
+- Settled: …
+- Open: …
 
 ## Suggested skills
-- <skill-name> — 为何下一程应 Read 它
+- <skill-name> — why the next session should Read it
 
-## 不要重复做的事
+## Do not repeat
 - …
 ```
 
-## 与 zhijunio-skills 链式
+## zhijunio-skills chain hints
 
-| 下一程可能 | 建议 Read |
-|------------|-----------|
-| 继续抓取材料 | `read` |
-| 多源研究写作 | `learn` |
-| 去 AI 味润色 | `humanize` |
-| 重组长文章节 | `edit-article` |
-| 压测方案 | `grill-me` |
-| 代码增量 SDD | 用户安装的 `sdd-plan` / `sdd-build` 等（本仓外） |
+| Next session likely needs | Suggest Read |
+|---------------------------|--------------|
+| More fetching | `read` |
+| Multi-source research writing | `learn` |
+| De-AI polish | `humanize` |
+| Reorder long-article sections | `edit-article` |
+| Stress-test a plan | `grill-me` |
+| Code increment SDD | User-installed `sdd-plan` / `sdd-build` (outside this repo) |
 
-## 若用户传了 argument-hint
+## If argument-hint is provided
 
-把其视为**下一程焦点**，收紧「下一程目标」与 **Suggested skills**，省略无关历史。
+Treat it as the **next-session focus**; tighten **Next-session goal** and **Suggested skills**; omit irrelevant history.

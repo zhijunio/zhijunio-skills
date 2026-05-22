@@ -1,41 +1,41 @@
 ---
 name: grill-me
-description: 对已有计划或设计逐条拷问（一次一问、带推荐答案），直到决策树各分支达成共识；能查代码库则先查。用户说 grill me、拷问方案、压测设计、stress-test plan 时使用。不写文件、不替代 sdd-plan 或 learn 全文产出。
-argument-hint: "要拷问的主题或文档路径（可选）"
+description: Interrogate an existing plan or design one question at a time (with a recommended answer each) until decision-tree branches align; explore the codebase first when possible. Use for grill me, stress-test plan, challenge design. Writes no files; does not replace sdd-plan or learn full outputs.
+argument-hint: "Topic to grill or path to a doc (optional)"
 ---
 
-# Grill me — 方案拷问
+# Grill me — plan interrogation
 
-灵感来自 [mattpocock/skills `grill-me`](https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me)（MIT）。
+Inspired by [mattpocock/skills `grill-me`](https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me) (MIT).
 
-## 做什么
+## Purpose
 
-对用户提供的**计划、设计、架构想法**进行拷问，直到双方对**决策树各分支**理解一致。
+Interrogate the user’s **plan, design, or architecture idea** until both sides agree on each branch of the **decision tree**.
 
-## 硬规则
+## Hard rules
 
-- **一次只问一个问题**；等用户回答后再问下一个。
-- **每个问题附带你的推荐答案**（及简短理由），便于用户拍板。
-- **能靠代码库/文档回答的，先探索**，不要问用户已知信息。
-- **本技能阶段不写文件** —— 不写 `docs/sdd/plans/`、不写 brainstorm 设计稿、不 commit。
-- 拷问结束后，若用户要落盘：建议 **`Read` `learn`**（长文）、**`sdd-brainstorm`** / **`sdd-plan`**（在业务仓 SDD 流程中），由用户显式切换。
+- **One question at a time**; wait for an answer before the next.
+- **Each question includes your recommended answer** (and a short rationale) so the user can decide quickly.
+- **Explore the codebase/docs first** when that answers the question; do not ask the user for known facts.
+- **No file writes in this skill** — no `docs/sdd/plans/`, no brainstorm design docs, no commits.
+- After grilling, if the user wants artifacts on disk: suggest **`Read` `learn`** (long-form), **`sdd-brainstorm`** / **`sdd-plan`** (in the app repo SDD flow); user must switch explicitly.
 
-## 流程
+## Flow
 
-1. 确认拷问对象（用户粘贴、路径，或当前对话里的方案摘要）。
-2. 列出主要决策分支（可在心里或简短列出，不必长文）。
-3. 按依赖顺序逐分支追问：先决问题 → 下游问题。
-4. 未决项归零或明确标记「待用户会后决定」后结束。
+1. Confirm the subject (paste, path, or summary from the current thread).
+2. List major decision branches (mental or brief list; no long essay).
+3. Walk branches in dependency order: prerequisites → downstream questions.
+4. Stop when open items are zero or clearly marked **deferred by user**.
 
-## 与仓库其他技能
+## Related skills in this repo
 
-| 技能 | 关系 |
-|------|------|
-| **learn** | learn 从材料**写出**结构；grill-me 对**已有**方案压测 |
-| **humanize** | 无关（改 prose） |
-| **edit-article** | 无关（改文章结构） |
-| **handoff** | 长拷问后可 handoff 给新 Agent 继续写 plan |
+| Skill | Relationship |
+|-------|----------------|
+| **learn** | learn **writes** structure from sources; grill-me **stress-tests** an existing plan |
+| **humanize** | Unrelated (prose polish) |
+| **edit-article** | Unrelated (article structure) |
+| **handoff** | After a long grill, hand off to a new agent to draft a plan |
 
-## 若用户传了 argument-hint
+## If argument-hint is provided
 
-将其视为拷问范围（例如「只问数据库迁移」），不要扩散到无关子系统。
+Treat it as scope (e.g. “database migration only”); do not expand into unrelated subsystems.

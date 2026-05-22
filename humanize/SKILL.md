@@ -1,56 +1,56 @@
 ---
 name: humanize
-description: 去 AI 味、就地润色中英文正文；改稿、审稿、双语排版、发版说明、社媒短文。在用户说去 AI 味、humanize、润色、去套话、release notes、推文审稿时使用。不用于代码注释、commit message、行内技术文档。要重组章节结构时用 edit-article。执行前按 references/write-methods.md 加载分语言/分模式参考。
+description: De-AI polish and in-place editing for Chinese/English prose; copy edit, review, bilingual layout, release notes, social posts. Use for humanize, polish, remove AI tells, release notes, tweet review. Not for code comments, commit messages, or inline API docs. For chapter reordering use edit-article. Load references/write-methods.md before editing.
 ---
 
-# Humanize：去 AI 味，改得像人写的
+# Humanize — sound human, not generated
 
-**词表与分模式清单** 在 `humanize/references/`，本页只保留边界与硬规则。
+**Word lists and mode-specific checklists** live in `humanize/references/`; this page keeps boundaries and hard rules only.
 
-首条回复可在句首内联加 `🥷`（不要单独成段）。
+You may inline `🥷` at the start of the first reply (not as its own paragraph).
 
-## 执行前必读
+## Before editing
 
-1. 打开 **[`humanize/references/write-methods.md`](references/write-methods.md)**，按其中 **加载路由** 阅读对应 reference（中文 / 英文 / 双语 / 发版 / 社媒 / 文档审稿等）。
-2. 读完再改；**不要**在未读路由表时凭印象硬套词表，避免中英文规则混用。
+1. Open **[`humanize/references/write-methods.md`](references/write-methods.md)** and follow the **loading router** for the right reference (ZH / EN / bilingual / release / social / document review, etc.).
+2. Read those references before editing; **do not** apply ZH/EN rules from memory and mix them up.
 
-## 边界
+## Boundaries
 
-- **只做自然语言**：不替代代码审查、不改写 commit message（除非用户明确说「这条 commit message 当文案润色」）。
-- **意思优先于文风**：删套话不能扭曲作者原意。
-- **结构重组** → 用 **`edit-article`**（分节、DAG 顺序、段长约束）；本技能默认**就地**润色，不重排章节。
+- **Natural language only**: not code review; do not rewrite commit messages unless the user explicitly treats one as copy to polish.
+- **Meaning over style**: cutting filler must not distort the author’s intent.
+- **Structure changes** → use **`edit-article`** (sections, DAG order, paragraph length); this skill defaults to **in-place** polish without reordering sections.
 
-## 起飞前（不满足则先问一句）
+## Preflight (ask one question if missing)
 
-1. **有正文吗？** 用户只下指令没贴文本 → 请用户粘贴或指路径。
-2. **受众锁了吗？** 无法从文本推断（博客 vs 邮件 vs RFC）→ 先问再改。
-3. **语言**：以**被编辑文本**为准选 reference（见 `write-methods.md`）；用户用中文下指令不代表正文一定是中文稿。
+1. **Body text?** Instruction only, no paste → ask for paste or path.
+2. **Audience locked?** Cannot infer blog vs email vs RFC → ask first.
+3. **Language**: choose references from the **text being edited** (see `write-methods.md`); the user’s UI language does not imply the draft language.
 
-## 硬规则
+## Hard rules
 
-- **就地编辑**：默认不重排标题层级、不合并章节、不调换段落顺序，除非用户明确要求改结构（或已用 **`edit-article`** 定稿结构）。
-- **默认零 meta**：输出 **改后的正文**；不要默认附「改动列表」或长篇解释，除非用户要 changelog 式说明。
-- **不堆高级词**：目标是自然、清晰，不是「显得厉害」。
+- **In-place edit**: do not change heading levels, merge sections, or reorder paragraphs unless the user asks for structure changes (or **`edit-article`** already fixed structure).
+- **Default zero meta**: output **revised body only**; no default change log unless the user wants changelog-style notes.
+- **No prestige vocabulary**: goal is natural and clear, not “sounding smart.”
 
-## 分模式细节（均在 references）
+## Mode details (in references)
 
-| 需求 | 见 |
+| Need | See |
 |------|-----|
-| 中文套话、语体 | [`write-zh.md`](references/write-zh.md) |
-| 英文套话、语体 | [`write-en.md`](references/write-en.md) |
-| 中英混排、双语对照 | [`write-bilingual.md`](references/write-bilingual.md) + 指北链接见内文 |
+| Chinese tells, register | [`write-zh.md`](references/write-zh.md) |
+| English tells, register | [`write-en.md`](references/write-en.md) |
+| Mixed ZH/EN, bilingual pairs | [`write-bilingual.md`](references/write-bilingual.md) |
 | Release / changelog | [`write-release-notes.md`](references/write-release-notes.md) |
-| 社媒 / 推文 | [`write-social.md`](references/write-social.md) |
-| 长文档审稿、隐私、段落连贯诊断 | [`write-document-review.md`](references/write-document-review.md) |
+| Social / tweets | [`write-social.md`](references/write-social.md) |
+| Long-doc review, privacy, coherence scan | [`write-document-review.md`](references/write-document-review.md) |
 
 ## Gotchas
 
-| 情况 | 处理 |
-|------|------|
-| 把博客改成论文腔 | 按受众降维，口语可保留 |
-| 用户没要数改列表却输出 diff 清单 | 默认只交正文 |
-| 对纯英文稿套「中英空格」规则 | 仅中英混排时适用（见 `write-bilingual.md`） |
+| Situation | Handling |
+|-----------|----------|
+| Blog turned into academic tone | Match audience; keep acceptable colloquialisms |
+| User did not ask for a diff list | Deliver body only |
+| English-only draft gets CJK spacing rules | Apply only for mixed ZH/EN (see `write-bilingual.md`) |
 
-## 输出
+## Output
 
-默认：**仅润色后的全文**。若因截断或多解需在文末 **一句** 说明，否则无前言后语。
+Default: **polished full text only**. At most **one sentence** at the end if truncation or ambiguity forced a caveat; otherwise no preamble or postscript.

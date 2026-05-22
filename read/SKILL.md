@@ -1,77 +1,77 @@
 ---
 name: read
-description: 将 URL 或 PDF 转为干净 Markdown，便于引用、存档或下游 learn/humanize。用户给出链接、读网页、抓取文章、看 PDF 内容时使用。优先运行本技能目录下 scripts；不用于仓库内已有文本文件（直接 Read 工具即可）。
+description: Turn URLs or PDFs into clean Markdown for citation, archive, or downstream learn/humanize. Use when the user gives a link, wants a page read, article fetch, or PDF text. Prefer scripts in this skill directory; not for plain text files already in the repo (use the Read tool).
 ---
 
-# Read：URL / PDF → Markdown
+# Read — URL / PDF → Markdown
 
-本技能 **`read/scripts/` + `read/references/read-methods.md` 自包含**，路径与命令均以本仓库为准。
+This skill is self-contained under **`read/scripts/`** + **`read/references/read-methods.md`**; paths and commands are relative to this repo.
 
-首条回复可在句首内联加 `🥷`。
+You may inline `🥷` at the start of the first reply.
 
-## 执行前必读
+## Before running
 
-打开并遵循：
+Open and follow:
 
 **[`read/references/read-methods.md`](references/read-methods.md)**
 
-其中含：代理链顺序、`read-url.sh` / `pdf-extract.sh` / `save-md.sh` 用法、付费墙、微信/飞书/X、与 MCP 的配合。
+Covers: proxy chain order, `read-url.sh` / `pdf-extract.sh` / `save-md.sh`, paywalls, WeChat / Feishu / X, MCP pairing.
 
-## 路径约定
+## Path convention
 
-- 若当前工作区为本仓库根目录：`READ_ROOT` = `read`（相对路径）或绝对路径 `.../zhijunio-skills/read`。
-- 抓取命令示例：
+- Workspace at repo root: `READ_ROOT` = `read` (relative) or absolute `.../zhijunio-skills/read`.
+- Example:
 
 ```bash
 bash read/scripts/read-url.sh "https://…"
 ```
 
-## 边界
+## Boundaries
 
-- **默认只做转换**：不主动总结、不延伸解读，除非用户在抓取后**明确**要求。
-- **本地仓库非 PDF 文本**：用编辑器 Read，不走本 skill。
+- **Default: convert only** — no summary or interpretation unless the user asks **after** fetch.
+- **Non-PDF text already in the repo**: use the editor Read tool, not this skill.
 
-## 路由摘要（细节以 read-methods 为准）
+## Routing summary (details in read-methods)
 
-| 场景 | 做法 |
-|------|------|
-| 通用 URL | `read-url.sh`（defuddle → jina → curl） |
-| 微信公众号 | `read-url.sh`（**jina → defuddle**，弱化误杀付费墙） |
-| 飞书 / Lark | 已设 `FEISHU_APP_*` 时 **`fetch_feishu.py`**；否则 jina/defuddle 兜底（易失败） |
-| GitHub blob | 脚本内 raw + 可选 `gh` |
-| 本地/远程 PDF | `pdf-extract.sh` 或 `read-url.sh` 内 PDF 分支 |
-| 强反爬 / 重 JS | 已配置的 **Firecrawl 等 MCP** 优先于脚本 |
+| Scenario | Approach |
+|----------|----------|
+| Generic URL | `read-url.sh` (defuddle → jina → curl) |
+| WeChat articles | `read-url.sh` (**jina → defuddle** to reduce false paywall kills) |
+| Feishu / Lark | **`fetch_feishu.py`** when `FEISHU_APP_*` set; else jina/defuddle fallback (often fails) |
+| GitHub blob | raw in script + optional `gh` |
+| Local/remote PDF | `pdf-extract.sh` or PDF branch in `read-url.sh` |
+| Heavy anti-bot / JS | Configured **Firecrawl etc. MCP** before scripts |
 
-## 输出格式（建议）
+## Suggested output shape
 
 ```text
 Title:  {title}
-Author: {author 若有}
-Source: {站点或类型}
-URL:    {原始链接}
+Author: {author if known}
+Source: {site or type}
+URL:    {original link}
 
 Content
-{Markdown 正文；过长可先截断并注明「以下截断至前 N 行/字」}
+{Markdown body; truncate with a note if too long}
 ```
 
-## 保存
+## Saving
 
-- **默认**：只在对话里展示 Markdown，**不新建文件**。
-- 用户说 **保存 / download / 下载**，或从 **`learn`** Phase 1 需要落盘时：`read-url.sh` 管道到 `save-md.sh`（见 read-methods §3）。
-- 未保存时不必强调「我没写文件」。
+- **Default**: show Markdown in chat only; **no new file**.
+- User says **save / download**, or **`learn`** Phase 1 needs files: pipe `read-url.sh` to `save-md.sh` (read-methods §3).
+- No need to stress “I didn’t write a file” when not saving.
 
-## 图片
+## Images
 
-默认不批量下图。用户明确要求「带图 / 下载图片」时，再从 Markdown 中提取图片 URL 下载到单独目录，并报告成功/失败 URL。
+Do not bulk-download by default. If the user asks for images, extract URLs from Markdown, download to a folder, report success/failure per URL.
 
 ## Gotchas
 
-| 情况 | 处理 |
-|------|------|
-| 用户说「读一下」其实要总结 | 先交付 Markdown，再问是否需要摘要 |
-| 返回的是 JSON | 抽取正文字段再展示 |
-| 内容过长 | 截断并说明；或只展示 `head -n 200` 预览 |
+| Situation | Handling |
+|-----------|----------|
+| “Read this” but they want a summary | Deliver Markdown first; then offer summary |
+| Response is JSON | Extract body field before display |
+| Content too long | Truncate with note, or `head -n 200` preview |
 
-## 与 `learn` 的配合
+## Pairing with `learn`
 
-多源研究时每条 URL 用本 skill；落盘命名与 `learn` Phase 1 一致即可。
+Use this skill per URL in multi-source research; naming on disk should match `learn` Phase 1 conventions.

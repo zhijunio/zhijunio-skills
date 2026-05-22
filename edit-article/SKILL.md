@@ -1,45 +1,45 @@
 ---
 name: edit-article
-description: 按标题分节、按信息依赖（DAG）重排，再逐节改写长文；单段建议不超过 240 字符。用户要改结构、重排章节、改善长文逻辑与可读性时使用。去套话/去 AI 味用 humanize，不重排章节。
+description: Split by headings, reorder by information dependency (DAG), then rewrite long articles section by section; keep paragraphs under ~240 characters when possible. Use to fix structure, reorder chapters, improve logic and readability. For de-AI polish without reordering, use humanize.
 ---
 
-# Edit article — 长文结构与逐节改写
+# Edit article — structure and section rewrite
 
-基于 [mattpocock/skills `edit-article`](https://github.com/mattpocock/skills/tree/main/skills/personal/edit-article)（MIT）补全流程。与 **`humanize`** 分工：**本技能改结构与节内改写**；**humanize** 默认就地润色、不重排章节。
+Completes [mattpocock/skills `edit-article`](https://github.com/mattpocock/skills/tree/main/skills/personal/edit-article) (MIT). Split from **`humanize`**: this skill handles **structure and in-section rewrite**; **humanize** defaults to in-place polish without reordering sections.
 
-## 边界
+## Boundaries
 
-- **对象**：博客、Newsletter、技术长文等 **Markdown/文章**，非代码、非 commit message。
-- **不替代 humanize**：结构定稿后，若要去 AI 味 → 用户 **`Read` `humanize`**。
-- **不替代 learn**：从零调研写长文 → **`learn`**。
+- **Targets**: blogs, newsletters, long technical **Markdown/articles** — not code, not commit messages.
+- **Does not replace humanize**: after structure is settled, point the user to **`Read` `humanize`** for de-AI polish.
+- **Does not replace learn**: research-from-scratch long-form → **`learn`**.
 
-## 流程
+## Flow
 
-### 1. 分节与依赖
+### 1. Sections and dependencies
 
-1. 按**标题**划分 section；理清每节要传达的要点。
-2. 把信息视为 **DAG**：被依赖的概念先出现，后依赖的放后。
-3. 给出建议的**章节顺序**（可含合并/拆分建议），**与用户确认**后再改正文。
+1. Split by **headings**; clarify what each section must convey.
+2. Treat information as a **DAG**: prerequisites before dependents.
+3. Propose a **section order** (merge/split allowed); **confirm with the user** before editing body text.
 
-### 2. 逐节改写
+### 2. Section-by-section rewrite
 
-对每个 section（按确认后的顺序）：
+For each section (in confirmed order):
 
-1. **改写**该节：清晰度、连贯、节奏；**单段尽量 ≤ 240 字符**（中文按字、英文按字符，可略灵活但保持短段）。
-2. 保持作者事实与立场；不擅自加未证实结论。
-3. 本节满意后再进入下一节（大文章可每节汇报进度）。
+1. **Rewrite** for clarity, flow, and pace; **aim for ≤ 240 characters per paragraph** (CJK by character, Latin by character count; slight flexibility OK, keep paragraphs short).
+2. Preserve the author’s facts and stance; do not add unverified claims.
+3. Finish one section before the next (report progress per section on very long pieces).
 
-### 3. 收尾
+### 3. Wrap-up
 
-1. 通读全文：节与节衔接、有无重复或缺口。
-2. 交付**完整改后正文**（默认就地更新用户指定路径，或按用户要求只输出 diff 区段）。
-3. 若用户要去 AI 味：提示 **`humanize`**，不在此技能内套 humanize 词表。
+1. Read end-to-end: transitions, duplication, gaps between sections.
+2. Deliver the **full revised text** (default: update the user’s path in place, or only changed regions if asked).
+3. If the user wants de-AI polish: suggest **`humanize`**; do not apply humanize word lists inside this skill.
 
-## 起飞前
+## Before you start
 
-- 有文章路径或全文；无则请用户提供。
-- 确认是否允许**调整标题层级**、删节、合并节（默认允许在确认阶段提出）。
+- Need article path or full text; otherwise ask the user.
+- Confirm whether **heading levels**, deletions, and merges are allowed (default: propose in the confirmation step).
 
-## 输出
+## Output
 
-默认：**改后的全文**（与 humanize 相同，少 meta）。用户要编辑说明时再附简短变更摘要。
+Default: **revised full text only** (same as humanize — minimal meta). Add a short change summary only if the user asks.
