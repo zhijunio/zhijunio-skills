@@ -1,6 +1,6 @@
 ---
 name: read
-description: 将 URL 或 PDF 转为干净 Markdown，便于引用、存档或下游 learn/write。用户给出链接、读网页、抓取文章、看 PDF 内容时使用。优先运行本技能目录下 scripts；不用于仓库内已有文本文件（直接 Read 工具即可）。
+description: 将 URL 或 PDF 转为干净 Markdown，便于引用、存档或下游 learn/humanize。用户给出链接、读网页、抓取文章、看 PDF 内容时使用。优先运行本技能目录下 scripts；不用于仓库内已有文本文件（直接 Read 工具即可）。
 ---
 
 # Read：URL / PDF → Markdown

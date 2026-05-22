@@ -132,7 +132,7 @@ test -d "$ROOT/.github/workflows" && echo has_ci=yes || echo has_ci=no
 
 ## 16. 技能仓库（如 `zhijunio-skills`）
 
-各 `*/SKILL.md` 的 `name` / `description`；链式技能（read → learn → write）是否互相指向本仓库路径。
+各 `*/SKILL.md` 的 `name` / `description`；链式技能（read → learn → humanize / edit-article）是否互相指向本仓库路径。
 
 ## 17. Finding 规范
 
