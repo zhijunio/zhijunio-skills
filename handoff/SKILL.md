@@ -49,17 +49,6 @@ Write a handoff document for the **next agent / new session** so work can contin
 - …
 ```
 
-## zhijunio-skills chain hints
-
-| Next session likely needs | Suggest Read |
-|---------------------------|--------------|
-| More fetching | `read` |
-| Multi-source research writing | `learn` |
-| De-AI polish | `humanize` |
-| Reorder long-article sections | `edit-article` |
-| Stress-test a plan | `grill-me` |
-| Code increment SDD | User-installed `sdd-plan` / `sdd-build` (outside this repo) |
-
 ## If argument-hint is provided
 
 Treat it as the **next-session focus**; tighten **Next-session goal** and **Suggested skills**; omit irrelevant history.

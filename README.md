@@ -8,39 +8,35 @@
 |-----------|---------|
 | [**bookmark**](bookmark/SKILL.md) | Save links as local Markdown bookmarks (title, tags, dedup). |
 | [**diary**](diary/SKILL.md) | Diary files: paths, timestamps, images, `DIARY_VAULT_ROOT`, Git flow. |
-| [**health**](health/SKILL.md) | Audit the AI collaboration stack (rules, MCP, hooks, secrets); `scripts/collect-context.sh`, `references/health-methods.md`. |
 | [**jinrishici**](jinrishici/SKILL.md) | Today’s poem API; fixed Chinese display format. |
 | [**keep**](keep/SKILL.md) | Sync Keep runs to Garmin-style `running.json` (`keep/scripts/`). |
-| [**learn**](learn/SKILL.md) | Multi-source → structured long-form / canonical reference; chains with **read**, **humanize**. |
-| [**read**](read/SKILL.md) | URL / PDF → Markdown; see `read/references/` for Feishu, WeChat, proxies, MCP. |
-| [**humanize**](humanize/SKILL.md) | De-AI polish, bilingual/release/social/review modes; word lists in `humanize/references/` (formerly `write`). |
-| [**edit-article**](edit-article/SKILL.md) | Split by headings, DAG reorder, section rewrite; use **humanize** for de-AI after structure. |
+| [**research-write**](research-write/SKILL.md) | Multi-source → long-form; `research-write/references/` + `drafts/<slug>/` layout. |
+| [**fetch-content**](fetch-content/SKILL.md) | URL / PDF → Markdown; `fetch-content/references/` — decision tree, CN platforms, MCP, **research-write** handoff. |
+| [**humanize**](humanize/SKILL.md) | De-AI polish; `write-zh.md` / `write-en.md` replacement tables; **L1–L4** `write-qa-layers.md` (optional 质检报告). |
+| [**rewrite-article**](rewrite-article/SKILL.md) | Split by headings, DAG reorder, section rewrite; see `rewrite-article/references/` for DAG examples and **humanize** handoff. |
 | [**grill-me**](grill-me/SKILL.md) | One question at a time on a plan/design, with recommended answers, until the decision tree aligns. |
 | [**handoff**](handoff/SKILL.md) | Compress the session to a handoff doc (temp file + path refs) for the next agent. |
 
 ## Optional chains
 
 ```text
-read (fetch) → learn (research pipeline) → humanize (de-AI)
+fetch-content → research-write (research pipeline) → humanize (de-AI)
                     ↘                      ↗
-                 edit-article (reorder) ──┘
-                    ↘
-                 health (stack / repo hygiene audit)
+                 rewrite-article (reorder) ──┘
 
-grill-me (stress-test plan) ──→ learn / sdd-plan (user switches to persist)
-handoff (new session) ──→ points at read / learn / humanize / edit-article, etc.
+grill-me (stress-test plan) ──→ research-write / sdd-plan (user switches to persist)
+handoff (new session) ──→ points at fetch-content / research-write / humanize / rewrite-article, etc.
 ```
 
-- **learn** Phase 1: **read** scripts and `read-methods.md`.
-- **learn** Phase 5: **humanize**; messy structure → **edit-article** then **humanize**.
-- **health** stands alone for rules/MCP/secret hygiene.
+- **research-write** Phase 1: **fetch-content** + `research-sources.md`; file under `research-write/drafts/<slug>/`.
+- **research-write** Phase 5–6: **humanize**; structure → **rewrite-article** first; review → `research-write/references/review-checklist.md`.
 - **grill-me** / **handoff** are outside SDD increment contracts; app repos use installed `sdd-plan`, etc.
 
 ## Usage
 
 1. Add this repo to your host’s **Skills** config so each `SKILL.md` is indexed.
 2. Skills usually trigger from **`description`** match; you can also name a skill in the prompt.
-3. Scripted skills (**read**, **health**, **keep**) document commands in `SKILL.md`; install deps (`bash`, `python3`, `requests`, …) on the machine.
+3. Scripted skills (**fetch-content**, **keep**) document commands in `SKILL.md`; install deps (`bash`, `python3`, `requests`, …) on the machine.
 
 ## Layout
 
@@ -57,7 +53,7 @@ handoff (new session) ──→ points at read / learn / humanize / edit-article
 
 ## Acknowledgements
 
-Early **read / humanize / learn / health** layering drew on **[Waza](https://github.com/tw93/Waza)** (MIT). **handoff**, **grill-me**, and **edit-article** flows reference **[mattpocock/skills](https://github.com/mattpocock/skills)** (MIT). This repo’s `SKILL.md`, `references/`, and `scripts/` are maintained independently; **credits do not imply 1:1 parity** with upstream installs.
+Early **fetch-content / humanize / research-write** layering drew on **[Waza](https://github.com/tw93/Waza)** (MIT). **handoff**, **grill-me**, and **rewrite-article** flows reference **[mattpocock/skills](https://github.com/mattpocock/skills)** (MIT). This repo’s `SKILL.md`, `references/`, and `scripts/` are maintained independently; **credits do not imply 1:1 parity** with upstream installs.
 
 ## License
 

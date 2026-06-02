@@ -2,7 +2,7 @@
 # Fetch URL or local .pdf → Markdown-ish text on stdout. Exit 0 on non-empty body.
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-URL_RAW="${1:?usage: read-url.sh <url-or-path>}"
+URL_RAW="${1:?usage: fetch-url.sh <url-or-path>}"
 
 paywall_hint() {
   local haystack="$1"
@@ -29,7 +29,7 @@ weixin_nonempty_ok() {
 }
 
 try_curl() {
-  curl -sL --max-time 90 -A "Mozilla/5.0 (compatible; zhijunio-read/1.0)" "$1" || true
+  curl -sL --max-time 90 -A "Mozilla/5.0 (compatible; zhijunio-fetch-content/1.0)" "$1" || true
 }
 
 try_defuddle() {
@@ -45,13 +45,13 @@ if [[ -f "$URL_RAW" ]]; then
   if [[ "$URL_RAW" == *.pdf ]] || file -b --mime-type "$URL_RAW" 2>/dev/null | grep -qi pdf; then
     exec "$SCRIPT_DIR/pdf-extract.sh" "$URL_RAW"
   fi
-  echo "read-url.sh: local file is not a PDF: $URL_RAW" >&2
+  echo "fetch-url.sh: local file is not a PDF: $URL_RAW" >&2
   exit 1
 fi
 
 URL="$URL_RAW"
 if [[ "$URL" != http://* ]] && [[ "$URL" != https://* ]]; then
-  echo "read-url.sh: not a remote URL or existing local .pdf: $URL" >&2
+  echo "fetch-url.sh: not a remote URL or existing local .pdf: $URL" >&2
   exit 1
 fi
 
@@ -95,7 +95,7 @@ if $is_pdf_url; then
     printf '%s' "$body"
     exit 0
   fi
-  tmp=$(mktemp -t readpdfXXXXXX.pdf)
+  tmp=$(mktemp -t fetchpdfXXXXXX.pdf)
   trap 'rm -f "$tmp"' EXIT
   if curl -sL --max-time 120 -o "$tmp" "$URL"; then
     "$SCRIPT_DIR/pdf-extract.sh" "$tmp"
@@ -111,6 +111,8 @@ if [[ "$URL" == *"feishu.cn"* || "$URL" == *"larksuite.com"* ]]; then
       printf '%s' "$body"
       exit 0
     fi
+  else
+    echo "fetch-url.sh: Feishu/Lark URL — set FEISHU_APP_ID and FEISHU_APP_SECRET, or use lark-doc skill (see fetch-content/references/platforms-cn.md)" >&2
   fi
 fi
 
@@ -147,6 +149,6 @@ if nonempty_ok "$body"; then
   exit 0
 fi
 
-echo "read-url.sh: all methods failed or paywall/empty for: $URL" >&2
+echo "fetch-url.sh: all methods failed or paywall/empty for: $URL" >&2
 echo "Tried: github raw/gh (if blob), defuddle.md, r.jina.ai, direct curl" >&2
 exit 1
