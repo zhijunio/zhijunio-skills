@@ -71,7 +71,7 @@ Pointer: [`sources/INDEX.md`](sources/INDEX.md)
 - **Type:** demo | walkthrough | version-compare | repro
 - **Command or anchor:** {vault `examples/` script or external `code_repo` command}
 - **Code:** `examples/` or TOPIC.yaml `code_repo`
-- **Verified on:** {demo machine + date — see [`references/verify-format.md`](../references/verify-format.md)}
+- **Verified on:** {demo machine + date — see [`references/formats.md`](../references/formats.md)}
 - **Narrative baseline:** {usually TOPIC.yaml `runtime`}
 - **Sample output:** → `examples/README.md` (paste real output; do not ellipsize `@hash` if used as evidence)
 - **Expected outcome:**

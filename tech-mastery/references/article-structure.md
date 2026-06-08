@@ -58,21 +58,4 @@ If the topic is too broad to support both layers well, split it into two article
 
 ## Multi-file organization
 
-When a topic needs more than one file, group them in a dedicated topic directory (v2):
-
-```text
-<topic-dir>/
-  TOPIC.yaml
-  README.md
-  <slug>-mastery-map.md
-  <slug>.md
-  <slug>-*.md              # 0–2 side articles (mechanism, practice, …)
-  <slug>-interview.md
-  <slug>-glossary.md       # mechanism / spec topics
-  sources/INDEX.md
-  reference/
-  examples/                 # README.md: commands + pasted output; source here OR in code_repo
-  learning-records/
-```
-
-`README.md` should explain file roles, reading order (**Recall** / **Explain**), **`examples/README.md`** when demos exist, and a diagram of how files relate.
+Topic directory layout is defined in [`SKILL.md` → Workspace](../SKILL.md#workspace). README should explain file roles, **Recall / Explain** order, and `examples/README.md` when demos exist.

@@ -11,6 +11,8 @@ Examples: Java reflection, TCP congestion control, Raft, Spring transaction prop
 
 **Not for:** single-link summaries, opinion without sources, shallow interview-only cheat sheets, interactive HTML courses (see teach-style skills elsewhere).
 
+**Skill 布局（v2 精简）：** `SKILL.md`（流程 + checklist）· `references/formats.md`（Mission/Source/Verify/Glossary/LR/TOPIC）· `references/article-structure.md` · `references/interviewization.md` · `templates/`（3 个可复制模板）。
+
 ## Invocation
 
 User should provide at minimum:
@@ -51,15 +53,14 @@ Use `refresh` when the user asks to re-run demos, fix `verified_on` vs narrative
 
 ## Before you start
 
-1. Read existing material in the topic dir if any; set `mode` in [`templates/TOPIC.yaml`](templates/TOPIC.yaml).
-2. Use **fetch-content** at Source (+ [`fetch-content/references/tech-mastery-sources.md`](../fetch-content/references/tech-mastery-sources.md) when installed).
-3. Use **humanize** at Humanize when available.
-4. Read as needed:
-   - [`references/mastery-methods.md`](references/mastery-methods.md)
-   - [`references/article-structure.md`](references/article-structure.md)
-   - [`references/interviewization.md`](references/interviewization.md)
-   - [`references/mission-format.md`](references/mission-format.md) · [`references/resources-format.md`](references/resources-format.md) · [`references/learning-record-format.md`](references/learning-record-format.md) · [`references/glossary-format.md`](references/glossary-format.md) · [`references/verify-format.md`](references/verify-format.md)
-5. Bootstrap from [`templates/mastery-map.md`](templates/mastery-map.md) and [`templates/interview-output.md`](templates/interview-output.md).
+1. Read existing material in the topic dir; set `mode` in [`templates/TOPIC.yaml`](templates/TOPIC.yaml)（字段见 [`references/formats.md`](references/formats.md)）。
+2. **fetch-content** at Source（+ `fetch-content/references/tech-mastery-sources.md` when installed）。
+3. **humanize** at Humanize when available。
+4. **按需读 reference**（不要一次全读）：
+   - Scope / Source / Verify / Record → [`references/formats.md`](references/formats.md)
+   - Write → [`references/article-structure.md`](references/article-structure.md)
+   - Interviewize → [`references/interviewization.md`](references/interviewization.md)
+5. Bootstrap → [`templates/mastery-map.md`](templates/mastery-map.md) · [`templates/interview-output.md`](templates/interview-output.md)
 
 ## Outcome
 
@@ -122,7 +123,7 @@ If `code_repo` is null, runnable files may live under `examples/` as today.
 
 ## Step 1: Scope
 
-Write **Mission** into `<slug>-mastery-map.md` ([`references/mission-format.md`](references/mission-format.md)):
+Write **Mission** into `<slug>-mastery-map.md`（[`references/formats.md` → Mission](references/formats.md)）：
 
 - **Why** — concrete outcome, not「了解 X」
 - **Success looks like** — **reader/outcome** abilities (explain, demo, answer interview). Do **not** list run meta here (humanize done, file counts); those belong in the checklist.
@@ -135,7 +136,7 @@ Gate: no Success + Out of scope → do not proceed to Source.
 
 ## Step 2: Source
 
-Layer sources ([`references/resources-format.md`](references/resources-format.md)):
+Layer sources（[`references/formats.md` → Sources](references/formats.md)）：
 
 - **L1** normative: spec, RFC, official docs, reference implementation source
 - **L2** framework / product official docs or source
@@ -157,7 +158,7 @@ Gate: if the map cannot be filled, understanding is insufficient — more Source
 
 ## Step 4: Verify
 
-At least one verification, recorded per [`references/verify-format.md`](references/verify-format.md) in mastery-map **## Verification** and `TOPIC.yaml` (`runtime` = narrative baseline, `verified_on` = demo machine if different):
+At least one verification, recorded per [`references/formats.md` → Verification](references/formats.md) in mastery-map **## Verification** and `TOPIC.yaml` (`runtime` = narrative baseline, `verified_on` = demo machine if different):
 
 - Runnable demo: **`examples/README.md`** holds command + **paste real output**; source in `examples/` **or** external `code_repo`, **or**
 - Source/spec walkthrough (tag + path or section anchor), **or**
@@ -194,7 +195,7 @@ Terms must match glossary when glossary exists.
 
 ## Step 7: Record
 
-Append [`learning-records/NNNN-slug.md`](references/learning-record-format.md) when:
+Append `learning-records/NNNN-slug.md` when（格式 [`references/formats.md` → Learning record](references/formats.md)）：
 
 1. A **non-obvious misconception** was corrected
 2. **Prior knowledge depth** was established (avoid re-teaching later)
