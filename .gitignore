@@ -29,7 +29,7 @@ node_modules/
 .idea/
 
 # --- This repo: generated Keep sync output (may contain personal data) ---
-keep/scripts/data/
+personal/keep/scripts/data/
 
 # --- Local databases ---
 *.sqlite3

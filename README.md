@@ -6,12 +6,12 @@
 
 | Directory | Summary |
 |-----------|---------|
-| [**jinrishici**](jinrishici/SKILL.md) | Today’s poem API; fixed Chinese display format. |
-| [**keep**](keep/SKILL.md) | Sync Keep runs to Garmin-style `running.json` (`keep/scripts/`). |
-| [**tech-mastery**](tech-mastery/SKILL.md) | One topic end-to-end: `new` or `refresh` (merge/gap-fill), mastery-map, sources, verify, article, interview, learning-records, humanize. |
-| [**fetch-content**](fetch-content/SKILL.md) | URL / PDF → Markdown; `fetch-content/references/` — decision tree, CN platforms, MCP, **tech-mastery** handoff. |
+| [**jinrishici**](personal/jinrishici/SKILL.md) | Today’s poem API; fixed Chinese display format. |
+| [**keep**](personal/keep/SKILL.md) | Sync Keep runs to Garmin-style `running.json` (`keep/scripts/`). |
+| [**tech-mastery**](productivity/tech-mastery/SKILL.md) | One topic end-to-end: `new` or `refresh` (merge/gap-fill), mastery-map, sources, verify, article, interview, learning-records, humanize. |
+| [**fetch-content**](util/fetch-content/SKILL.md) | URL / PDF → Markdown; `fetch-content/references/` — decision tree, CN platforms, MCP, **tech-mastery** handoff. |
 | [**humanize**](humanize/SKILL.md) | De-AI polish; `write-zh.md` / `write-en.md` replacement tables; **L1–L4** `write-qa-layers.md` (optional 质检报告). |
-| [**rewrite-article**](rewrite-article/SKILL.md) | Split by headings, DAG reorder, section rewrite; see `rewrite-article/references/` for DAG examples and **humanize** handoff. |
+| [**rewrite-article**](productivity/rewrite-article/SKILL.md) | Split by headings, DAG reorder, section rewrite; see `rewrite-article/references/` for DAG examples and **humanize** handoff. |
 | [**grill-me**](grill-me/SKILL.md) | One question at a time on a plan/design, with recommended answers, until the decision tree aligns. |
 | [**handoff**](handoff/SKILL.md) | Compress the session to a handoff doc (temp file + path refs) for the next agent. |
 
